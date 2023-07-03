@@ -1,9 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Navbar, Sidebar, Footer } from './components';
+import { Home } from '.';
 import styled from 'styled-components';
 
 const Layout = () => {
-  return <div>Layout</div>;
+  return (
+    <>
+      <Home />
+    </>
+  );
 };
 
 export default Layout;
