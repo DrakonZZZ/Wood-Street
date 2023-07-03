@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useProductsContext } from '../context/products_context';
-import { single_product_url as url } from '../utilities/data';
-import { formatPrice } from '../utils/helpers';
+// import { single_product_url as url } from '../utilities/data';
+import { formatPrice } from '../utilities/helper';
 import {
   Loading,
   Error,
@@ -48,8 +48,8 @@ const Wrapper = styled.main`
   }
 `;
 
-const SingleProductPage = () => {
+const SingleProduct = () => {
   return <h4>single product page</h4>;
 };
 
-export default SingleProductPage;
+export default SingleProduct;

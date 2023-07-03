@@ -6,8 +6,8 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div``;
 
-const CheckoutPage = () => {
+const Checkout = () => {
   return <h4>checkout page</h4>;
 };
 
-export default CheckoutPage;
+export default Checkout;

@@ -1,5 +1,5 @@
 import { PageHero } from '../components';
-import aboutImg from '../assets/hero-bcg.jpeg';
+// import aboutImg from '../assets/hero-bcg.jpeg';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
@@ -30,8 +30,8 @@ const Wrapper = styled.section`
   }
 `;
 
-const AboutPage = () => {
-  return <h4>about page</h4>;
+const About = () => {
+  return <h4>about </h4>;
 };
 
-export default AboutPage;
+export default About;

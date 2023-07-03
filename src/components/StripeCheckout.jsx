@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { loadStripe } from '@stripe/stripe-js';
-import {
-  CardElement,
-  useStripe,
-  Elements,
-  useElements,
-} from '@stripe/react-stripe-js';
-import axios from 'axios';
+// import { loadStripe } from '@stripe/stripe-js';
+// import {
+//   CardElement,
+//   useStripe,
+//   Elements,
+//   useElements,
+// } from '@stripe/react-stripe-js';
+// import axios from 'axios';
 import { useCartContext } from '../context/cart_context';
 import { useUserContext } from '../context/user_context';
-import { formatPrice } from '../utils/helpers';
-import { useHistory } from 'react-router-dom';
+import { formatPrice } from '../utilities/helper';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 const CheckoutForm = () => {
   return <h4>hello from Stripe Checkout </h4>;

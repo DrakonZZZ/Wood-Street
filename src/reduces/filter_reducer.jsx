@@ -7,7 +7,7 @@
 //   UPDATE_FILTERS,
 //   FILTER_PRODUCTS,
 //   CLEAR_FILTERS,
-// } from '../actions'
+// } from '../actions';
 
 const filter_reducer = (state, action) => {
   return state;

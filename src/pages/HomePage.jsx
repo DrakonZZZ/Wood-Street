@@ -1,4 +1,4 @@
-import { FeaturedProducts, Hero, Services, Contact } from '../components';
+import { FeaturedProducts, Banner, Services, Contact } from '../components';
 
 const HomePage = () => {
   return <h4>home page</h4>;

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useContext, useReducer } from 'react';
-import reducer from '../reducers/filter_reducer';
+import reducer from '../reduces/filter_reducer';
 // import {
 //   LOAD_PRODUCTS,
 //   SET_GRIDVIEW,
@@ -24,7 +24,7 @@ export const FilterProvider = ({ children }) => {
     </FilterContext.Provider>
   );
 };
-// make sure use
+
 export const useFilterContext = () => {
   return useContext(FilterContext);
 };

@@ -13,8 +13,8 @@ const Wrapper = styled.main`
   }
 `;
 
-const CartPage = () => {
+const Cart = () => {
   return <h4>cart page</h4>;
 };
 
-export default CartPage;
+export default Cart;

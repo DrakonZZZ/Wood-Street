@@ -1,6 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
-import { formatPrice } from '../utils/helpers';
+import { formatPrice } from '../utilities/helper';
 import AmountButtons from './AmountButtons';
 import { FaTrash } from 'react-icons/fa';
 import { useCartContext } from '../context/cart_context';

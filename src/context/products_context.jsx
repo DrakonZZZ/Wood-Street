@@ -1,7 +1,6 @@
-import axios from 'axios';
 import { createContext, useContext, useEffect, useReducer } from 'react';
-import reducer from '../reducers/products_reducer';
-import { products_url as url } from '../utilities/data';
+import reducer from '../reduces/products_reducer';
+// import { products_url as url } from '../utilities/data';
 // import {
 //   SIDEBAR_OPEN,
 //   SIDEBAR_CLOSE,

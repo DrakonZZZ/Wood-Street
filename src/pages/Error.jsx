@@ -16,8 +16,8 @@ const Wrapper = styled.main`
   }
 `;
 
-const ErrorPage = () => {
+const Error = () => {
   return <h4>error page</h4>;
 };
 
-export default ErrorPage;
+export default Error;

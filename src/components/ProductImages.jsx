@@ -1,9 +1,5 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-
-const ProductImages = () => {
-  return <h4>product images</h4>
-}
+import { useState } from 'react';
+import styled from 'styled-components';
 
 const Wrapper = styled.section`
   .main {
@@ -48,6 +44,10 @@ const Wrapper = styled.section`
       }
     }
   }
-`
+`;
 
-export default ProductImages
+const ProductImages = () => {
+  return <h4>product images</h4>;
+};
+
+export default ProductImages;
