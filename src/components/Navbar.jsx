@@ -75,6 +75,7 @@ const StyledNavbar = styled.nav`
 `;
 
 const Nav = () => {
+  const { showSidebar } = useProductsContext();
   return (
     <StyledNavbar>
       <div className="nav-center">
@@ -82,7 +83,7 @@ const Nav = () => {
           <Link to="/">
             <h3>Wood Street</h3>
           </Link>
-          <button type="button" className="nav-hamburger">
+          <button type="button" className="nav-hamburger" onClick={showSidebar}>
             {<FaBars />}
           </button>
         </div>

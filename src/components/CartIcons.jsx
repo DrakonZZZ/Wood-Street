@@ -1,4 +1,4 @@
-import { FaShoppingCart, FaUser, FaUserPlus } from 'react-icons/fa';
+import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useProductsContext } from '../context/products_context';
 import { useCartContext } from '../context/cart_context';
@@ -69,9 +69,10 @@ const StyledCartIcon = styled.div`
 `;
 
 const CartIcons = () => {
+  const { hideSidebar } = useProductsContext();
   return (
     <StyledCartIcon className="cart-btn-container">
-      <Link to="/cart" className="cart-btn">
+      <Link to="/cart" className="cart-btn" onClick={hideSidebar}>
         Cart{' '}
         <span className="cart-container">
           <FaShoppingCart />

@@ -22,15 +22,11 @@ const StyledSidebar = styled.div`
     color: var(--clr-primary-5);
     transition: var(--transition);
     cursor: pointer;
-    color: var(--clr-red-dark);
+    color: var(--primary-1);
     margin-top: 0.2rem;
   }
   .close-btn:hover {
-    color: var(--clr-red-light);
-  }
-  .logo {
-    justify-self: center;
-    height: 45px;
+    color: var(--primary-4);
   }
   .links {
     margin-bottom: 2rem;
@@ -41,7 +37,7 @@ const StyledSidebar = styled.div`
     font-size: 1rem;
     text-transform: capitalize;
     padding: 1rem 1.5rem;
-    color: var(--clr-grey-3);
+    color: var(--grey-3);
     transition: var(--transition);
     letter-spacing: var(--spacing);
   }
@@ -49,8 +45,8 @@ const StyledSidebar = styled.div`
   .links a:hover {
     padding: 1rem 1.5rem;
     padding-left: 2rem;
-    background: var(--clr-grey-10);
-    color: var(--clr-grey-2);
+    background: var(--grey-10);
+    color: var(--grey-2);
   }
 
   .sidebar {
@@ -59,16 +55,16 @@ const StyledSidebar = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--clr-white);
+    background: var(--white);
     transition: var(--transition);
-    transform: translate(-100%);
+    transform: translate(100%);
     z-index: -1;
   }
-  .show-sidebar {
+  .display-sidebar {
     transform: translate(0);
     z-index: 999;
   }
-  .cart-btn-wrapper {
+  .cart-btn-container {
     margin: 2rem auto;
   }
   @media screen and (min-width: 992px) {
@@ -79,7 +75,41 @@ const StyledSidebar = styled.div`
 `;
 
 const Sidebar = () => {
-  return <StyledSidebar></StyledSidebar>;
+  const { isSidebarDisplay, hideSidebar } = useProductsContext();
+  return (
+    <StyledSidebar>
+      <aside
+        className={`${
+          isSidebarDisplay ? 'sidebar display-sidebar' : 'sidebar'
+        }`}
+      >
+        <div className="sidebar-header">
+          <h3>Wood Street</h3>
+          <button type="button" className="close-btn" onClick={hideSidebar}>
+            <FaTimes />
+          </button>
+        </div>
+        <ul className="links">
+          {links.map((navLinks) => {
+            const { id, text, urls } = navLinks;
+            return (
+              <li key={id}>
+                <Link to={urls} onClick={hideSidebar}>
+                  {text}
+                </Link>
+              </li>
+            );
+          })}
+          <li>
+            <Link to="/checkout" onClick={hideSidebar}>
+              Checkout
+            </Link>
+          </li>
+        </ul>
+        <CartIcons />
+      </aside>
+    </StyledSidebar>
+  );
 };
 
 export default Sidebar;
