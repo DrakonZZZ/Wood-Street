@@ -3,25 +3,21 @@ import styled from 'styled-components';
 
 const StyledServices = styled.section`
   h3 {
-    color: var(--primary-2);
+    color: #f6f6f6;
   }
   h4 {
     color: var(--primary-10);
   }
   padding: 5rem 0;
 
-  background: linear-gradient(
-    360deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(200, 200, 200, 1) 100%
-  );
+  background: var(--primary-4);
   .header h3 {
     margin-bottom: 1rem;
   }
   p {
     margin-bottom: 0;
     line-height: 1.8;
-    color: var(--primary-3);
+    color: var(--primary-6);
   }
   .services-center {
     margin-top: 4rem;

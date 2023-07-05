@@ -5,12 +5,8 @@ import Loading from './Loading';
 import Product from './Product';
 import styled from 'styled-components';
 
-const FeaturedProducts = () => {
-  return <h4>featured products</h4>;
-};
-
-const Wrapper = styled.section`
-  background: var(--clr-grey-10);
+const StyledFeatured = styled.section`
+  background: var(--grey-10);
   .featured {
     margin: 4rem auto;
     display: grid;
@@ -31,5 +27,30 @@ const Wrapper = styled.section`
     }
   }
 `;
+
+const FeaturedProducts = () => {
+  const { productsFeatured, isLoadingProducts, errorProducts } =
+    useProductsContext();
+  if (errorProducts) {
+    return <Error />;
+  }
+  return (
+    <StyledFeatured className="section">
+      <div className="title">
+        <h2>Featured Products</h2>
+        <div className="underline"></div>
+      </div>
+      {isLoadingProducts ? (
+        <Loading />
+      ) : (
+        <div className="section-center featured">
+          {productsFeatured.map((product) => {
+            return <Product key={product.id} {...product} />;
+          })}
+        </div>
+      )}
+    </StyledFeatured>
+  );
+};
 
 export default FeaturedProducts;

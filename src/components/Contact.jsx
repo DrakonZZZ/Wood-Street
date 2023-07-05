@@ -1,3 +1,4 @@
+import { useForm, ValidationError } from '@formspree/react';
 import styled from 'styled-components';
 
 const StyledContact = styled.section`
@@ -73,6 +74,7 @@ const StyledContact = styled.section`
 `;
 
 const Contact = () => {
+  const [state, handleSubmit] = useForm('mbjvjrkn');
   return (
     <StyledContact>
       <div className="section-center">
@@ -85,15 +87,32 @@ const Contact = () => {
             fuga nostrum quas ratione maiores sapiente asperiores, adipisci
             accusantium amet veritatis voluptate?
           </p>
-          <form className="contact-form">
-            <input type="email" className="form-input" placeholder="Email" />
-            <button type="submit" className="submit-btn">
-              Contact
-            </button>
-          </form>
+          {state.succeeded ? (
+            <h4>Thanks for Contacting us!</h4>
+          ) : (
+            <FormComponent handleSubmit={handleSubmit} state={state} />
+          )}
         </div>
       </div>
     </StyledContact>
+  );
+};
+
+const FormComponent = ({ handleSubmit, state }) => {
+  return (
+    <form onSubmit={handleSubmit} className="contact-form">
+      <input
+        type="email"
+        className="form-input"
+        id="email"
+        placeholder="Email"
+        name="email"
+      />
+      <ValidationError prefix="Email" field="email" errors={state.errors} />
+      <button type="submit" className="submit-btn" disabled={state.submitting}>
+        Contact
+      </button>
+    </form>
   );
 };
 

@@ -1,8 +1,8 @@
 import {
   SIDEBAR_SHOW,
   SIDEBAR_HIDE,
-  GET_PRODUCTS_BEGIN,
-  GET_PRODUCTS_SUCCESS,
+  GET_PRODUCTS_LOAD,
+  GET_PRODUCTS_LOAD_SUCCESS,
   GET_PRODUCTS_ERROR,
   GET_SINGLE_PRODUCT_BEGIN,
   GET_SINGLE_PRODUCT_SUCCESS,
@@ -17,11 +17,29 @@ const products_reducer = (state, action) => {
     case SIDEBAR_HIDE: {
       return { ...state, isSidebarDisplay: false };
     }
-    default:
+    case GET_PRODUCTS_LOAD: {
+      return { ...state, isLoadingProducts: true };
+    }
+    case GET_PRODUCTS_LOAD_SUCCESS: {
+      const allProducts = action.payload;
+      const featuredProducts = allProducts.filter(
+        (item) => item.featured === true
+      );
+      return {
+        ...state,
+        isLoadingProducts: false,
+        products: allProducts,
+        productsFeatured: featuredProducts,
+      };
+    }
+    case GET_PRODUCTS_ERROR: {
+      return { ...state, isLoadingProducts: false, errorProducts: true };
+    }
+    default: {
+      console.log(`No Matching "${action.type}" - action type`);
       return state;
+    }
   }
-  return state;
-  throw new Error(`No Matching "${action.type}" - action type`);
 };
 
 export default products_reducer;
