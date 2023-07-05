@@ -69,6 +69,7 @@
  hr {
    border: none;
    border-top: 1px solid var(--grey-8);
+   color: rgb(202, 202, 202)
  }
 
  h1,
@@ -179,6 +180,7 @@
  }
 
  .btn {
+
    display: flex;
    align-items: center;
    justify-content: center;
@@ -209,7 +211,7 @@
  }
 
  .title .underline {
-   width: 6rem;
+   width: 10rem;
    height: 0.25rem;
    background: #49a6e9;
    background: var(--primary-5);
@@ -223,5 +225,5 @@
  }
 
  .page {
-   min-height: calc(100vh - (20vh + 10rem));
+   min-height: calc(100vh - (8vh + 10rem));
  }
