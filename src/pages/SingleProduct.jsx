@@ -36,7 +36,7 @@ const StyledSingle = styled.main`
     display: grid;
     grid-template-columns: 125px 1fr;
     span {
-      font-weight: 700;
+      font-weight: 600;
     }
   }
 
@@ -98,11 +98,11 @@ const SingleProduct = () => {
           <ProductImages images={images} />
           <div className="content">
             <h3>{name}</h3>
-            <Stars />
             <p className="info">
               <span>Product-Id :</span>
               {id}
             </p>
+            <Stars stars={stars} reviews={reviews} />
             <p className="desc">{description}</p>
             <p className="info">
               <span>Availablity :</span>
@@ -114,7 +114,7 @@ const SingleProduct = () => {
             </p>
             <h5 className="price">{formatPrice(price)}</h5>
             <hr />
-            {stock > 0 && <AddToCart />}
+            {stock > 0 && <AddToCart singleProduct={singleProduct} />}
           </div>
         </div>
       </div>

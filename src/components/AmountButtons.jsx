@@ -1,14 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const StyledAmount = styled.div`
   display: grid;
   width: 140px;
   justify-items: center;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  h2 {
+  h3 {
     margin-bottom: 0;
   }
   button {
@@ -26,8 +25,18 @@ const Wrapper = styled.div`
     margin-bottom: 0;
   }
 `;
-const AmountButtons = () => {
-  return <h4>amount buttons </h4>;
+const AmountButtons = ({ cartValue, cartIncrease, cartDecrease }) => {
+  return (
+    <StyledAmount className="amount-btns">
+      <button type="button" className="amount-btn" onClick={cartDecrease}>
+        <FaMinus />
+      </button>
+      <h3 className="amount">{cartValue}</h3>
+      <button type="button" className="amount-btn" onClick={cartIncrease}>
+        <FaPlus />
+      </button>
+    </StyledAmount>
+  );
 };
 
 export default AmountButtons;
