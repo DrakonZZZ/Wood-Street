@@ -35,12 +35,13 @@ const StyledHero = styled.section`
       rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   }
 `;
-const PageHero = ({ navigator }) => {
+const PageHero = ({ navigator, product }) => {
   return (
     <StyledHero>
       <div className="section-center">
         <h4>
           <Link to="/">Home /</Link>
+          {product && <Link to="/products">Products /</Link>}
           <span>{navigator}</span>
         </h4>
       </div>

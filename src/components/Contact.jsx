@@ -78,8 +78,8 @@ const Contact = () => {
   return (
     <StyledContact>
       <div className="section-center">
-        <h3>Contact us via Email</h3>
-        <h4>Get 15% off on your first order registration</h4>
+        <h3>Contact Us via Email</h3>
+        <h4>Get 15% off on your first registration</h4>
         <div className="content">
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit

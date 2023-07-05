@@ -167,6 +167,7 @@
    background: linear-gradient(90deg, rgba(240, 219, 241, 1) 0%, rgba(188, 148, 190, 1) 50%, rgba(240, 219, 241, 1) 100%);
    background-size: 400%;
    animation: loading 1.2s ease-in-out infinite;
+   background-color: rgba(85, 85, 85, 0.378);
  }
 
  @keyframes loading {

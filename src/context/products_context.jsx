@@ -7,7 +7,7 @@ import {
   GET_PRODUCTS_LOAD,
   GET_PRODUCTS_LOAD_SUCCESS,
   GET_PRODUCTS_ERROR,
-  GET_SINGLE_PRODUCT_BEGIN,
+  GET_SINGLE_PRODUCT_lOAD,
   GET_SINGLE_PRODUCT_SUCCESS,
   GET_SINGLE_PRODUCT_ERROR,
 } from '../reduces/actionTypes';
@@ -21,6 +21,9 @@ export const ProductsProvider = ({ children }) => {
     errorProducts: false,
     products: [],
     productsFeatured: [],
+    isLoadingSingle: false,
+    errorProductSingle: false,
+    singleProduct: {},
   });
 
   const showSidebar = () => {
@@ -42,13 +45,27 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
+  const fetchSingleProductData = async (url) => {
+    dispatch({ type: GET_SINGLE_PRODUCT_lOAD });
+    try {
+      const resData = await fetch(url);
+      const parseData = await resData.json();
+      dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: parseData });
+    } catch (error) {
+      dispatch({ type: GET_SINGLE_PRODUCT_ERROR });
+      throw new Error(error);
+    }
+  };
+
   useEffect(() => {
     dispatch({ type: GET_PRODUCTS_LOAD });
     fetchProductData(products_url);
   }, []);
 
   return (
-    <ProductsContext.Provider value={{ ...state, showSidebar, hideSidebar }}>
+    <ProductsContext.Provider
+      value={{ ...state, showSidebar, hideSidebar, fetchSingleProductData }}
+    >
       {children}
     </ProductsContext.Provider>
   );

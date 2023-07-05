@@ -13,6 +13,7 @@ const StyledProduct = styled.article`
   img {
     width: 100%;
     display: block;
+    object-fit: cover;
     border-radius: var(--radius);
     transition: var(--transition);
   }
@@ -33,11 +34,11 @@ const StyledProduct = styled.article`
   }
   .product-section:hover img {
     transform: scale(1.1);
-    opacity: 0.5;
+    opacity: 0.4;
   }
   .product-section:hover .link {
     border-radius: 20px;
-    background-color:  rgba(85, 85, 85, 0.4);
+    background-color:  rgba(85, 85, 85, 0.5);
     opacity: 1;
   }
   footer {
@@ -77,7 +78,7 @@ const Product = ({ id, name, price, image }) => {
         </Link>{' '}
         <footer>
           <h5>{name}</h5>
-          <p>{price}</p>
+          <p>{formatPrice(price)}</p>
         </footer>
       </div>
     </StyledProduct>

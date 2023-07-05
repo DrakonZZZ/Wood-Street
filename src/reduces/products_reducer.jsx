@@ -4,9 +4,9 @@ import {
   GET_PRODUCTS_LOAD,
   GET_PRODUCTS_LOAD_SUCCESS,
   GET_PRODUCTS_ERROR,
-  GET_SINGLE_PRODUCT_BEGIN,
   GET_SINGLE_PRODUCT_SUCCESS,
   GET_SINGLE_PRODUCT_ERROR,
+  GET_SINGLE_PRODUCT_lOAD,
 } from './actionTypes';
 
 const products_reducer = (state, action) => {
@@ -33,7 +33,20 @@ const products_reducer = (state, action) => {
       };
     }
     case GET_PRODUCTS_ERROR: {
-      return { ...state, isLoadingProducts: false, errorProducts: true };
+      return { ...state, isLoadingProducts: false, errorProductSingle: true };
+    }
+    case GET_SINGLE_PRODUCT_lOAD: {
+      return { ...state, isLoadingSingle: true, errorProductSingle: false };
+    }
+    case GET_SINGLE_PRODUCT_SUCCESS: {
+      return {
+        ...state,
+        isLoadingSingle: false,
+        singleProduct: action.payload,
+      };
+    }
+    case GET_SINGLE_PRODUCT_ERROR: {
+      return { ...state, isLoadingSingle: false, errorProductSingle: true };
     }
     default: {
       console.log(`No Matching "${action.type}" - action type`);
