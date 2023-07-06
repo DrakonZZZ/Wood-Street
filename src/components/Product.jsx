@@ -1,5 +1,4 @@
 import { formatPrice } from '../utilities/helper';
-import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -75,7 +74,7 @@ const Product = ({ id, name, price, image }) => {
         <img src={image} alt={name} />
         <Link to={`/products/${id}`} className="link">
           View info
-        </Link>{' '}
+        </Link>
         <footer>
           <h5>{name}</h5>
           <p>{formatPrice(price)}</p>

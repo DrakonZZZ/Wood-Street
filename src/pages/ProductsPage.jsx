@@ -1,11 +1,7 @@
 import { Filters, ProductList, Sort, PageHero } from '../components';
 import styled from 'styled-components';
 
-const ProductsPage = () => {
-  return <h4>products page</h4>;
-};
-
-const Wrapper = styled.div`
+const StyledProduct = styled.div`
   .products {
     display: grid;
     gap: 3rem 1.5rem;
@@ -17,5 +13,22 @@ const Wrapper = styled.div`
     }
   }
 `;
+
+const ProductsPage = () => {
+  return (
+    <section>
+      <PageHero navigator="products" />
+      <StyledProduct className="page">
+        <div className="section-center products">
+          <Filters />
+          <div>
+            <Sort />
+            <ProductList />
+          </div>
+        </div>
+      </StyledProduct>
+    </section>
+  );
+};
 
 export default ProductsPage;
