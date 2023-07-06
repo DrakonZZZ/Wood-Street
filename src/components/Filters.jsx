@@ -1,6 +1,5 @@
 import { useFilterContext } from '../context/filter_context';
 import { getUniqueValues, formatPrice } from '../utilities/helper';
-import { FaCheck } from 'react-icons/fa';
 import styled from 'styled-components';
 
 const StyledFilter = styled.section`
@@ -35,7 +34,7 @@ const StyledFilter = styled.section`
     border: none;
     border-bottom: 1px solid transparent;
     letter-spacing: var(--spacing);
-    color: var(--grey-5);
+    color: var(--primary-3);
     cursor: pointer;
   }
   .active {
@@ -55,31 +54,6 @@ const StyledFilter = styled.section`
     display: flex;
     align-items: center;
   }
-  .color-btn {
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    border-radius: 50%;
-    background: #222;
-    margin-right: 0.5rem;
-    border: none;
-    cursor: pointer;
-    opacity: 0.5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    svg {
-      font-size: 0.5rem;
-      color: var(--white);
-    }
-  }
-  .all-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0.5rem;
-    opacity: 0.5;
-  }
   .active {
     opacity: 1;
   }
@@ -87,9 +61,14 @@ const StyledFilter = styled.section`
     text-decoration: underline;
   }
   .price {
+    color: var(--primary-3);
     margin-bottom: 0.25rem;
   }
-  .shipping {
+  .slider {
+    width: 80%;
+    accent-color: var(--primary-3);
+  }
+  .ship {
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
@@ -98,10 +77,13 @@ const StyledFilter = styled.section`
     font-size: 1rem;
     max-width: 200px;
   }
+  input[type='checkbox'] {
+    accent-color: var(--primary-3);
+  }
   .clear-btn {
-    background: var(--red-dark);
-    color: var(--clr-white);
-    padding: 0.25rem 0.5rem;
+    background: var(--primary-3);
+    color: var(--white);
+    padding: 0.3rem 0.5rem;
     border-radius: var(--radius);
   }
   @media (min-width: 768px) {
@@ -118,7 +100,7 @@ const Filters = () => {
   const categories = getUniqueValues(allProducts, 'category');
   const companies = getUniqueValues(allProducts, 'company');
 
-  console.log(companies);
+  console.log('filtering');
 
   return (
     <StyledFilter>
@@ -176,7 +158,35 @@ const Filters = () => {
               })}
             </div>
           </div>
+          <div className="form-control">
+            <h5>Price</h5>
+            <p className="price">{formatPrice(filterTerm.price)}</p>
+            <input
+              type="range"
+              name="price"
+              className="slider"
+              onChange={updateFilter}
+              value={filterTerm.price}
+              min={filterTerm.minPrice}
+              max={filterTerm.maxPrice}
+            />
+          </div>
+          <div>
+            <div className="form-control ship">
+              <label htmlFor="shipping">Free Shipping</label>
+              <input
+                type="checkbox"
+                name="shipping"
+                id="shipping"
+                checked={filterTerm.ship}
+                onChange={updateFilter}
+              />
+            </div>
+          </div>
         </form>
+        <button type="button" className="clear-btn" onClick={resetFilter}>
+          Reset Filter
+        </button>
       </div>
     </StyledFilter>
   );

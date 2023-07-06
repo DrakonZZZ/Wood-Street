@@ -67,9 +67,51 @@ const filter_reducer = (state, action) => {
       };
     }
     case FILTER_PRODUCTS: {
-      return { ...state };
-    }
+      const { allProducts } = state;
+      const { value, category, company, price, shipping } = state.filterTerm;
+      let newFilterProducts = [...allProducts];
 
+      if (value) {
+        newFilterProducts = newFilterProducts.filter((product) => {
+          return product.name.toLowerCase().startsWith(value);
+        });
+      }
+
+      if (category !== 'all') {
+        newFilterProducts = newFilterProducts.filter((product) => {
+          return product.category === category;
+        });
+      }
+      if (company !== 'all') {
+        newFilterProducts = newFilterProducts.filter((product) => {
+          return product.company === company;
+        });
+      }
+      if (price) {
+        newFilterProducts = newFilterProducts.filter(
+          (product) => product.price <= price
+        );
+      }
+      if (shipping) {
+        newFilterProducts = newFilterProducts.filter(
+          (product) => product.shipping === true
+        );
+      }
+      return { ...state, filteredProducts: newFilterProducts };
+    }
+    case CLEAR_FILTERS: {
+      return {
+        ...state,
+        filterTerm: {
+          ...state.filterTerm,
+          value: '',
+          company: 'all',
+          category: 'all',
+          price: state.filterTerm.maxPrice,
+          ship: false,
+        },
+      };
+    }
     default:
       console.log(`No Matching "${action.type}" - action type`);
       return state;
