@@ -22,7 +22,7 @@ const StyledImage = styled.section`
     }
   }
   .active {
-    transition: all 200ms ease-in-out;
+    transition: all 100ms ease-in-out;
     transform: scale(1.1);
     box-shadow: rgba(101, 75, 107, 0.43461134453781514) 0px 2px 1px,
       rgba(101, 75, 107, 0.43461134453781514) 0px 4px 2px,

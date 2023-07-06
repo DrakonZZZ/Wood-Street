@@ -19,12 +19,27 @@ export const FilterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     allProducts: [],
     filteredProducts: [],
+    filterTerm: {
+      value: '',
+      company: 'all',
+      category: 'all',
+      minPrice: 0,
+      maxPrice: 0,
+      price: 0,
+      shipping: false,
+    },
     gridView: true,
+    sort: 'product-ascending',
   });
 
   useEffect(() => {
     dispatch({ type: LOAD_PRODUCTS, payload: products });
   }, [products]);
+
+  useEffect(() => {
+    dispatch({ type: FILTER_PRODUCTS });
+    dispatch({ type: SORT_PRODUCTS });
+  }, [products, state.sort, state.filterTerm]);
 
   const setGrid = () => {
     dispatch({ type: SET_GRIDVIEW });
@@ -33,12 +48,29 @@ export const FilterProvider = ({ children }) => {
   const setList = () => {
     dispatch({ type: SET_LISTVIEW });
   };
+
+  const updateSort = (e) => {
+    dispatch({ type: UPDATE_SORT, payload: e.target.value });
+  };
+  const updateFilter = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    if (name === 'category') {
+      value = e.target.textContent;
+    }
+    dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
+  };
+
+  const resetFilter = () => {};
   return (
     <FilterContext.Provider
       value={{
         ...state,
         setGrid,
         setList,
+        updateSort,
+        updateFilter,
+        resetFilter,
       }}
     >
       {children}

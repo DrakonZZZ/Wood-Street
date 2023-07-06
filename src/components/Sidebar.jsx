@@ -1,4 +1,3 @@
-// import logo from '../assets/logo.svg'
 import { Link } from 'react-router-dom';
 import { useProductsContext } from '../context/products_context';
 import { FaTimes } from 'react-icons/fa';
@@ -91,10 +90,10 @@ const Sidebar = () => {
         </div>
         <ul className="links">
           {links.map((navLinks) => {
-            const { id, text, urls } = navLinks;
+            const { id, text, url } = navLinks;
             return (
               <li key={id}>
-                <Link to={urls} onClick={hideSidebar}>
+                <Link to={url} onClick={hideSidebar}>
                   {text}
                 </Link>
               </li>

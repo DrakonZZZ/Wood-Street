@@ -5,4 +5,7 @@ export const formatPrice = (num) => {
   }).format(num / 100);
 };
 
-export const getUniqueValues = () => {};
+export const getUniqueValues = (item, cato) => {
+  const filterData = item.map((item) => item[cato]);
+  return ['all', ...new Set(filterData)];
+};

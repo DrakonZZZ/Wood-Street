@@ -48,7 +48,7 @@ const StyledSort = styled.section`
       }
     }
     .active {
-      transition: all 230ms ease-in-out;
+      transition: all 150ms ease-in-out;
       background: var(--primary-2);
       color: var(--primary-6);
     }
@@ -71,7 +71,8 @@ const StyledSort = styled.section`
 `;
 
 const Sort = () => {
-  const { filteredProducts, gridView, setGrid, setList } = useFilterContext();
+  const { filteredProducts, gridView, setGrid, setList, sort, updateSort } =
+    useFilterContext();
   return (
     <StyledSort>
       <div className="btn-container">
@@ -90,11 +91,17 @@ const Sort = () => {
       <hr />
       <form>
         <label htmlFor="sort">Sort by</label>
-        <select name="sort" id="sort" className="sort-input">
+        <select
+          name="sort"
+          id="sort"
+          className="sort-input"
+          value={sort}
+          onChange={updateSort}
+        >
           <option value="price-lowest">Lowest Price</option>
           <option value="price-highest">Higest Price</option>
-          <option value="price-ascending">A-Z</option>
-          <option value="price-descending">Z-A</option>
+          <option value="product-ascending">Ascending (a-z)</option>
+          <option value="product-descending">Decsending (z-a)</option>
         </select>
       </form>
     </StyledSort>
