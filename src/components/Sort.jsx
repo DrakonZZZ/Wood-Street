@@ -71,15 +71,19 @@ const StyledSort = styled.section`
 `;
 
 const Sort = () => {
-  const { filteredProducts, gridView } = useFilterContext();
+  const { filteredProducts, gridView, setGrid, setList } = useFilterContext();
   return (
     <StyledSort>
       <div className="btn-container">
-        <button type="button" className={`${!gridView && 'active'}`}>
+        <button
+          type="button"
+          className={`${!gridView && 'active'}`}
+          onClick={setList}
+        >
           <BsList />
         </button>
         <button type="button" className={`${gridView && 'active'}`}>
-          <BsFillGridFill />
+          <BsFillGridFill onClick={setGrid} />
         </button>
       </div>
       <p>{filteredProducts.length} products found</p>

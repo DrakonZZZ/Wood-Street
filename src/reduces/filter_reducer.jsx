@@ -18,6 +18,12 @@ const filter_reducer = (state, action) => {
         filteredProducts: [...action.payload],
       };
     }
+    case SET_GRIDVIEW: {
+      return { ...state, gridView: true };
+    }
+    case SET_LISTVIEW: {
+      return { ...state, gridView: false };
+    }
     default:
       console.log(`No Matching "${action.type}" - action type`);
       return state;

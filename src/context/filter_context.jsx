@@ -20,17 +20,25 @@ export const FilterProvider = ({ children }) => {
     allProducts: [],
     filteredProducts: [],
     gridView: true,
-    listView: false,
   });
 
   useEffect(() => {
     dispatch({ type: LOAD_PRODUCTS, payload: products });
   }, [products]);
 
+  const setGrid = () => {
+    dispatch({ type: SET_GRIDVIEW });
+  };
+
+  const setList = () => {
+    dispatch({ type: SET_LISTVIEW });
+  };
   return (
     <FilterContext.Provider
       value={{
         ...state,
+        setGrid,
+        setList,
       }}
     >
       {children}

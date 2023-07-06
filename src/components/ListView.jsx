@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyledList = styled.section`
   display: grid;
-  row-gap: 3rem;
+  row-gap: 2rem;
 
   img {
     width: 100%;
@@ -27,15 +27,20 @@ const StyledList = styled.section`
     margin-bottom: 1rem;
   }
   .btn {
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     padding: 0.25rem 0.5rem;
   }
   @media (min-width: 992px) {
-    article {
+    section {
       display: grid;
       grid-template-columns: auto 1fr;
-      column-gap: 2rem;
+      column-gap: 1rem;
       align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(62, 41, 65, 0.2);
+    }
+    .btn {
+      float: right;
     }
   }
 `;
@@ -46,7 +51,7 @@ const ListView = ({ filteredProducts }) => {
       {filteredProducts.map((products) => {
         const { id, name, price, image, description } = products;
         return (
-          <div key={id}>
+          <section key={id}>
             <img src={image} alt={name} loading="lazy" />
             <div>
               <h4>{name}</h4>
@@ -56,7 +61,7 @@ const ListView = ({ filteredProducts }) => {
                 Info
               </Link>
             </div>
-          </div>
+          </section>
         );
       })}
     </StyledList>
