@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const StyledCartColumn = styled.div`
   display: none;
   @media (min-width: 776px) {
     display: block;
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
       justify-items: center;
       column-gap: 1rem;
       h5 {
-        color: var(--clr-grey-5);
+        color: var(--grey-5);
         font-weight: 400;
       }
     }
@@ -27,7 +27,18 @@ const Wrapper = styled.div`
 `;
 
 const CartColumns = () => {
-  return <h4>cart columns</h4>;
+  return (
+    <StyledCartColumn>
+      <div className="content">
+        <h5>Item</h5>
+        <h5>Price</h5>
+        <h5>Quantity</h5>
+        <h5>Total</h5>
+        <span></span>
+      </div>
+      <hr />
+    </StyledCartColumn>
+  );
 };
 
 export default CartColumns;

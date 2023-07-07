@@ -70,13 +70,14 @@ const StyledCartIcon = styled.div`
 
 const CartIcons = () => {
   const { hideSidebar } = useProductsContext();
+  const { totalItems } = useCartContext();
   return (
     <StyledCartIcon className="cart-btn-container">
       <Link to="/cart" className="cart-btn" onClick={hideSidebar}>
         Cart{' '}
         <span className="cart-container">
           <FaShoppingCart />
-          <span className="cart-counter">14</span>
+          <span className="cart-counter">{totalItems}</span>
         </span>
       </Link>
       <button type="button" className="auth-btn">

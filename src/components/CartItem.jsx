@@ -1,11 +1,11 @@
-import styled from 'styled-components';
 import { formatPrice } from '../utilities/helper';
 import AmountButtons from './AmountButtons';
-import { FaTrash } from 'react-icons/fa';
+import { RxCross2 } from 'react-icons/rx';
 import { useCartContext } from '../context/cart_context';
+import styled from 'styled-components';
 
-const Wrapper = styled.article`
-  .subtotal {
+const StyledCartItem = styled.article`
+  .total {
     display: none;
   }
   .price {
@@ -39,7 +39,7 @@ const Wrapper = styled.article`
   }
 
   .color {
-    color: var(--clr-grey-5);
+    color: var(--grey-5);
     font-size: 0.75rem;
     letter-spacing: var(--spacing);
     text-transform: capitalize;
@@ -57,7 +57,7 @@ const Wrapper = styled.article`
     }
   }
   .price-small {
-    color: var(--clr-primary-5);
+    color: var(--primary-3);
   }
   .amount-btns {
     width: 75px;
@@ -71,25 +71,24 @@ const Wrapper = styled.article`
     }
   }
   .remove-btn {
-    color: var(--clr-white);
+    color: var(--primary-3);
     background: transparent;
     border: transparent;
     letter-spacing: var(--spacing);
-    background: var(--clr-red-dark);
     width: 1.5rem;
     height: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: var(--radius);
-    font-size: 0.75rem;
+    font-size: 1rem;
     cursor: pointer;
   }
   @media (min-width: 776px) {
-    .subtotal {
+    .total {
       display: block;
       margin-bottom: 0;
-      color: var(--clr-grey-5);
+      color: var(--grey-5);
       font-weight: 400;
       font-size: 1rem;
     }
@@ -99,7 +98,7 @@ const Wrapper = styled.article`
     .price {
       display: block;
       font-size: 1rem;
-      color: var(--clr-primary-5);
+      color: var(--primary-3);
       font-weight: 400;
     }
     .name {
@@ -140,8 +139,37 @@ const Wrapper = styled.article`
   }
 `;
 
-const CartItem = () => {
-  return <h4>cart item</h4>;
+const CartItem = ({ id, image, color, price, amount, name }) => {
+  const { removeItemCart, changeAmount } = useCartContext();
+  const Decrease = () => {};
+  return (
+    <StyledCartItem>
+      <div className="title">
+        <img src={image} alt={name} />
+        <div>
+          <h5 className="name">{name}</h5>
+          <p className="color">
+            color: <span style={{ background: color }}></span>
+          </p>
+          <h5 className="price-small">{formatPrice(price)}</h5>
+        </div>
+      </div>
+      <h5 className="price">{formatPrice(price)}</h5>
+      <AmountButtons
+        cartValue={amount}
+        cartIncrease={() => changeAmount(id, 'increase')}
+        cartDecrease={() => changeAmount(id, 'decrease')}
+      />
+      <h5 className="total">{formatPrice(price * amount)}</h5>
+      <button
+        type="button"
+        className="remove-btn"
+        onClick={() => removeItemCart(id)}
+      >
+        <RxCross2 />
+      </button>
+    </StyledCartItem>
+  );
 };
 
 export default CartItem;

@@ -22,7 +22,7 @@ export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     cart: getLocalStorage(),
     totalItems: 0,
-    totalTotal: 0,
+    totalAmount: 0,
     shippingCharges: 1024,
   });
 
@@ -30,12 +30,19 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: ADD_TO_CART, payload: { id, color, amount, product } });
   };
 
-  const removeItemCart = () => {};
-  const changeAmount = () => {};
-  const clearCart = () => {};
+  const removeItemCart = (id) => {
+    dispatch({ type: REMOVE_CART_ITEM, payload: id });
+  };
+  const changeAmount = (id, value) => {
+    dispatch({ type: TOGGLE_CART_ITEM_AMOUNT, payload: { id, value } });
+  };
+  const clearCart = () => {
+    dispatch({ type: CLEAR_CART });
+  };
   const totalCart = () => {};
 
   useEffect(() => {
+    dispatch({ type: COUNT_CART_TOTALS });
     localStorage.setItem('cart', JSON.stringify(state.cart));
   }, [state.cart]);
 

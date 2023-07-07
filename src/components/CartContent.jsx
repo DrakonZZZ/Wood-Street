@@ -1,12 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
 import { useCartContext } from '../context/cart_context';
 import { Link } from 'react-router-dom';
 import CartColumns from './CartColumns';
 import CartItem from './CartItem';
 import CartTotals from './CartTotals';
+import styled from 'styled-components';
 
-const Wrapper = styled.section`
+const StyledCartContent = styled.section`
   .link-container {
     display: flex;
     justify-content: space-between;
@@ -17,19 +16,42 @@ const Wrapper = styled.section`
     border-color: transparent;
     text-transform: capitalize;
     padding: 0.25rem 0.5rem;
-    background: var(--clr-primary-5);
-    color: var(--clr-white);
+    background: var(--primary-3);
+    color: var(--white);
     border-radius: var(--radius);
     letter-spacing: var(--spacing);
     font-weight: 400;
     cursor: pointer;
   }
   .clear-btn {
-    background: var(--clr-black);
+    font-weight: 500;
+    background: var(--primary-4);
   }
 `;
 const CartContent = () => {
-  return <h4>cart content </h4>;
+  const { cart, clearCart } = useCartContext();
+  return (
+    <StyledCartContent className="section section-center">
+      <CartColumns />
+      {cart.map((item) => {
+        return <CartItem key={item.id} {...item} />;
+      })}
+      <hr />
+      <div className="link-container">
+        <Link to="/products" className="link-btn">
+          continue Shopping
+        </Link>
+        <button
+          type="button"
+          className="link-btn clear-btn"
+          onClick={clearCart}
+        >
+          Clear Cart
+        </button>
+      </div>
+      <CartTotals />
+    </StyledCartContent>
+  );
 };
 
 export default CartContent;
