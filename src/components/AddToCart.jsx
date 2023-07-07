@@ -53,6 +53,7 @@ const StyledAddCart = styled.section`
 `;
 const AddToCart = ({ singleProduct }) => {
   const { id, stock, colors } = singleProduct;
+  const { addItemCart } = useCartContext();
   const [cartValue, setCartValue] = useState(1);
   const [shades, setShades] = useState(colors[0]);
 
@@ -102,7 +103,11 @@ const AddToCart = ({ singleProduct }) => {
           cartIncrease={cartIncrease}
           cartDecrease={cartDecrease}
         />
-        <Link to="/cart" className="btn">
+        <Link
+          to="/cart"
+          className="btn"
+          onClick={() => addItemCart(id, shades, cartValue, singleProduct)}
+        >
           Add to cart
         </Link>
       </div>
