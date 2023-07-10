@@ -75,6 +75,7 @@ const StyledSidebar = styled.div`
 
 const Sidebar = () => {
   const { isSidebarDisplay, hideSidebar } = useProductsContext();
+  const { clientUser, loginWithRedirect } = useUserContext();
   return (
     <StyledSidebar>
       <aside
@@ -99,11 +100,13 @@ const Sidebar = () => {
               </li>
             );
           })}
-          <li>
-            <Link to="/checkout" onClick={hideSidebar}>
-              Checkout
-            </Link>
-          </li>
+          {clientUser && (
+            <li>
+              <Link to="/checkout" onClick={hideSidebar}>
+                Checkout
+              </Link>
+            </li>
+          )}
         </ul>
         <CartIcons />
       </aside>

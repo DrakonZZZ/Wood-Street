@@ -3,6 +3,7 @@ import AmountButtons from './AmountButtons';
 import { RxCross2 } from 'react-icons/rx';
 import { useCartContext } from '../context/cart_context';
 import styled from 'styled-components';
+import { useUserContext } from '../context/user_context';
 
 const StyledCartItem = styled.article`
   .total {
@@ -141,7 +142,7 @@ const StyledCartItem = styled.article`
 
 const CartItem = ({ id, image, color, price, amount, name }) => {
   const { removeItemCart, changeAmount } = useCartContext();
-  const Decrease = () => {};
+  const { loginWithRedirect, clientUser, logout } = useUserContext();
   return (
     <StyledCartItem>
       <div className="title">

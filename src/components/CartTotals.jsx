@@ -40,6 +40,7 @@ const StyledCartTotal = styled.section`
 
 const CartTotals = () => {
   const { totalAmount, shippingCharges } = useCartContext();
+  const { clientUser, loginWithRedirect } = useUserContext();
   return (
     <StyledCartTotal>
       <div>
@@ -55,9 +56,17 @@ const CartTotals = () => {
             Grand Total :{' '}
             <span>{formatPrice(totalAmount + shippingCharges)}</span>
           </h4>
-          <Link to="/checkout" className="btn">
-            Checkout
-          </Link>
+          {clientUser ? (
+            <Link to="/checkout" className="btn">
+              Checkout
+            </Link>
+          ) : (
+            <Link>
+              <button className="btn" onClick={loginWithRedirect}>
+                Login to Checkout
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </StyledCartTotal>

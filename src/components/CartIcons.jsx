@@ -64,6 +64,13 @@ const StyledCartIcon = styled.div`
       padding: 4px;
       color: var(--primary-1);
     }
+    .profile{
+      margin-left: 5px;
+      padding: 4px;
+      width:30px;
+      hieght:30px;
+      border-radius: 50%;
+    }
     }
   }
 `;
@@ -71,6 +78,8 @@ const StyledCartIcon = styled.div`
 const CartIcons = () => {
   const { hideSidebar } = useProductsContext();
   const { totalItems } = useCartContext();
+  const { loginWithRedirect, clientUser, logout } = useUserContext();
+  console.log(clientUser);
   return (
     <StyledCartIcon className="cart-btn-container">
       <Link to="/cart" className="cart-btn" onClick={hideSidebar}>
@@ -80,10 +89,27 @@ const CartIcons = () => {
           <span className="cart-counter">{totalItems}</span>
         </span>
       </Link>
-      <button type="button" className="auth-btn">
-        Login
-        <FaUser />
-      </button>
+      {clientUser ? (
+        <button
+          type="button"
+          className="auth-btn"
+          onClick={() =>
+            logout({ logoutParams: { returnTo: window.location.origin } })
+          }
+        >
+          Logout
+          <img
+            src={clientUser?.picture}
+            alt={clientUser.nickname}
+            className="profile"
+          />
+        </button>
+      ) : (
+        <button type="button" className="auth-btn" onClick={loginWithRedirect}>
+          Login
+          <FaUser />
+        </button>
+      )}
     </StyledCartIcon>
   );
 };

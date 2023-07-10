@@ -78,6 +78,7 @@ const StyledNavbar = styled.nav`
 
 const Nav = () => {
   const { showSidebar } = useProductsContext();
+  const { clientUser } = useUserContext();
   return (
     <StyledNavbar>
       <div className="nav-center">
@@ -98,6 +99,11 @@ const Nav = () => {
               </li>
             );
           })}
+          {clientUser && (
+            <li>
+              <Link to="/checkout">Checkout</Link>
+            </li>
+          )}
         </ul>
         <CartIcons />
       </div>
