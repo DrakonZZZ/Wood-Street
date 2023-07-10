@@ -5,6 +5,16 @@ import About from './About';
 import Cart from './Cart';
 import Checkout from './Checkout';
 import Error from './Error';
-import Private from './PrivateRoute';
-
-export { Home, Products, SingleProduct, About, Cart, Checkout, Error, Private };
+import PrivateRoute from './PrivateRoute';
+import AuthWrapper from './AuthWrapper';
+export {
+  Home,
+  Products,
+  SingleProduct,
+  About,
+  Cart,
+  Checkout,
+  Error,
+  PrivateRoute,
+  AuthWrapper,
+};

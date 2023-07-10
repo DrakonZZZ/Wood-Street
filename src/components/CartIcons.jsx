@@ -77,9 +77,8 @@ const StyledCartIcon = styled.div`
 
 const CartIcons = () => {
   const { hideSidebar } = useProductsContext();
-  const { totalItems } = useCartContext();
+  const { totalItems, clearCart } = useCartContext();
   const { loginWithRedirect, clientUser, logout } = useUserContext();
-  console.log(clientUser);
   return (
     <StyledCartIcon className="cart-btn-container">
       <Link to="/cart" className="cart-btn" onClick={hideSidebar}>
@@ -93,9 +92,10 @@ const CartIcons = () => {
         <button
           type="button"
           className="auth-btn"
-          onClick={() =>
-            logout({ logoutParams: { returnTo: window.location.origin } })
-          }
+          onClick={() => {
+            logout({ logoutParams: { returnTo: window.location.origin } });
+            clearCart();
+          }}
         >
           Logout
           <img

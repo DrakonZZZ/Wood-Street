@@ -1,31 +1,20 @@
 import { useState, useEffect } from 'react';
-// import { loadStripe } from '@stripe/stripe-js';
-// import {
-//   CardElement,
-//   useStripe,
-//   Elements,
-//   useElements,
-// } from '@stripe/react-stripe-js';
-// import axios from 'axios';
+import { loadStripe } from '@stripe/stripe-js';
+import {
+  CardElement,
+  useStripe,
+  Elements,
+  useElements,
+} from '@stripe/react-stripe-js';
 import { useCartContext } from '../context/cart_context';
 import { useUserContext } from '../context/user_context';
 import { formatPrice } from '../utilities/helper';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const CheckoutForm = () => {
-  return <h4>hello from Stripe Checkout </h4>;
-};
+const loadData = loadStripe(import.meta.env.VITE_STRIPE_KEY_PUB);
 
-const StripeCheckout = () => {
-  return (
-    <Wrapper>
-      <CheckoutForm />
-    </Wrapper>
-  );
-};
-
-const Wrapper = styled.section`
+const StyledStripe = styled.section`
   form {
     width: 30vw;
     align-self: center;
@@ -164,5 +153,117 @@ const Wrapper = styled.section`
     }
   }
 `;
+
+const StripeCheckout = () => {
+  return (
+    <StyledStripe>
+      <Elements stripe={loadData}>
+        <CheckoutForm />
+      </Elements>
+    </StyledStripe>
+  );
+};
+
+const CheckoutForm = () => {
+  const { cart, totalAmount, shippingCharges } = useCartContext();
+  const { clientUser } = useUserContext();
+  const navigate = useNavigate();
+
+  const [succeeded, setsucceeded] = useState(false);
+  const [error, setError] = useState(null);
+  const [processing, setProcessing] = useState('');
+  const [disabled, setDisabled] = useState(true);
+  const [clientSecret, setClientSecert] = useState('');
+
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const cardStyle = {
+    style: {
+      base: {
+        color: '#32325d',
+        fontFamily: 'Arial,san-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#32325d',
+        },
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a',
+      },
+    },
+  };
+
+  const createPaymentIntent = async () => {
+    try {
+      const data = await fetch('/.netlify/functions/payment-intent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ cart, shippingCharges, totalAmount }),
+      });
+      const parsedData = await data.json();
+      console.log(parsedData.clientSecret);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  useEffect(() => {
+    createPaymentIntent();
+  }, []);
+
+  const handleChange = async (event) => {
+    setDisabled(event.empty);
+    setError(event.error ? event.error.message : '');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div>
+      {succeeded ? (
+        <div>
+          <h4>Thank You!</h4>
+          <h4>Your payment was successful</h4>
+        </div>
+      ) : (
+        <div>
+          <p>Test Card Number: 4000 0566 5566 5556</p>
+          <h4>Hello, {clientUser && clientUser.nickname}</h4>
+          <p>Your total is {formatPrice(shippingCharges + totalAmount)}</p>
+        </div>
+      )}
+      <form id="payment-form" onSubmit={handleSubmit}>
+        <CardElement
+          id="card-element"
+          options={cardStyle}
+          onChange={handleChange}
+        />
+        <button disabled={processing || disabled || succeeded} type="submit">
+          <span id="button-text">
+            {processing ? <div id="spinner" className="spinner"></div> : 'Pay'}
+          </span>
+        </button>
+        {error && (
+          <div className="card-error" role="alert">
+            {error}
+          </div>
+        )}
+        <p className={succeeded ? 'result-message' : 'result-message hidden'}>
+          Payment succeeded, see the result in your
+          <a href={`https://dashboard.stripe.com/test/payments`}>
+            <span> Stripe dashboard</span>
+          </a>
+        </p>
+      </form>
+    </div>
+  );
+};
 
 export default StripeCheckout;

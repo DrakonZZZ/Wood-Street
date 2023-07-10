@@ -75,7 +75,7 @@ const StyledSidebar = styled.div`
 
 const Sidebar = () => {
   const { isSidebarDisplay, hideSidebar } = useProductsContext();
-  const { clientUser, loginWithRedirect } = useUserContext();
+  const { clientUser } = useUserContext();
   return (
     <StyledSidebar>
       <aside
