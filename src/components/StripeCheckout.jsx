@@ -16,7 +16,8 @@ const loadData = loadStripe(import.meta.env.VITE_STRIPE_KEY_PUB);
 
 const StyledStripe = styled.section`
   form {
-    width: 30vw;
+    margin-top: 1rem;
+    width: 50vw;
     align-self: center;
     box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
       0px 2px 5px 0px rgba(50, 50, 93, 0.1),
@@ -68,7 +69,7 @@ const StyledStripe = styled.section`
   }
   /* Buttons and links */
   button {
-    background: #5469d4;
+    background: var(--primary-3);
     font-family: Arial, sans-serif;
     color: #ffffff;
     border-radius: 0 0 4px 4px;
@@ -89,13 +90,13 @@ const StyledStripe = styled.section`
     opacity: 0.5;
     cursor: default;
   }
-  /* spinner/processing state, errors */
-  .spinner,
-  .spinner:before,
-  .spinner:after {
+  /* /processing state, errors */
+  .,
+  .:before,
+  .:after {
     border-radius: 50%;
   }
-  .spinner {
+  . {
     color: #ffffff;
     font-size: 22px;
     text-indent: -99999px;
@@ -108,15 +109,15 @@ const StyledStripe = styled.section`
     -ms-transform: translateZ(0);
     transform: translateZ(0);
   }
-  .spinner:before,
-  .spinner:after {
+  .:before,
+  .:after {
     position: absolute;
     content: '';
   }
-  .spinner:before {
+  .:before {
     width: 10.4px;
     height: 20.4px;
-    background: #5469d4;
+    background: var(--primary-3);
     border-radius: 20.4px 0 0 20.4px;
     top: -0.2px;
     left: -0.2px;
@@ -125,7 +126,7 @@ const StyledStripe = styled.section`
     -webkit-animation: loading 2s infinite ease 1.5s;
     animation: loading 2s infinite ease 1.5s;
   }
-  .spinner:after {
+  .:after {
     width: 10.4px;
     height: 10.2px;
     background: #5469d4;
@@ -154,6 +155,53 @@ const StyledStripe = styled.section`
   }
 `;
 
+const StyledDummyCard = styled.div`
+  padding: 1rem;
+  border-radius: 10px;
+  height: 250px;
+  max-width: 400px;
+  margin: 0 auto;
+  color: #dadada;
+  background: url('https://c4.wallpaperflare.com/wallpaper/88/260/1018/pink-nebula-wallpaper-preview.jpg')
+    left center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  position: relative;
+  .card-name {
+    position: absolute;
+    top: -10px;
+    right: 1rem;
+    font-size: 1.2rem;
+    img {
+      width: 90px;
+    }
+  }
+  .card-number {
+    position: absolute;
+    bottom: 3.5rem;
+    translate: 20%;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+  }
+  .card-amount {
+    position: absolute;
+    top: 1rem;
+  }
+  .card-holder-name {
+    position: absolute;
+    left: 1rem;
+    bottom: 10px;
+    font-size: 1.2rem;
+  }
+  .card-expi {
+    position: absolute;
+    right: 1rem;
+    bottom: 10px;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+`;
+
 const StripeCheckout = () => {
   return (
     <StyledStripe>
@@ -165,11 +213,11 @@ const StripeCheckout = () => {
 };
 
 const CheckoutForm = () => {
-  const { cart, totalAmount, shippingCharges } = useCartContext();
+  const { cart, totalAmount, shippingCharges, clearCart } = useCartContext();
   const { clientUser } = useUserContext();
   const navigate = useNavigate();
 
-  const [succeeded, setsucceeded] = useState(false);
+  const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState('');
   const [disabled, setDisabled] = useState(true);
@@ -186,7 +234,7 @@ const CheckoutForm = () => {
         fontSmoothing: 'antialiased',
         fontSize: '16px',
         '::placeholder': {
-          color: '#32325d',
+          color: 'var(--primary-3)',
         },
       },
       invalid: {
@@ -206,7 +254,7 @@ const CheckoutForm = () => {
         body: JSON.stringify({ cart, shippingCharges, totalAmount }),
       });
       const parsedData = await data.json();
-      console.log(parsedData.clientSecret);
+      setClientSecert(parsedData.clientSecret);
     } catch (error) {
       console.log(error.response);
     }
@@ -223,6 +271,24 @@ const CheckoutForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setProcessing(true);
+    const payload = stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    });
+    if (payload.error) {
+      setError(`Payment failed ${payload.error.message}`);
+      setProcessing(false);
+    } else {
+      setError(null);
+      setProcessing(false);
+      setSucceeded(true);
+      setTimeout(() => {
+        clearCart();
+        navigate('/');
+      }, 15000);
+    }
   };
 
   return (
@@ -233,11 +299,19 @@ const CheckoutForm = () => {
           <h4>Your payment was successful</h4>
         </div>
       ) : (
-        <div>
-          <p>Test Card Number: 4000 0566 5566 5556</p>
-          <h4>Hello, {clientUser && clientUser.nickname}</h4>
-          <p>Your total is {formatPrice(shippingCharges + totalAmount)}</p>
-        </div>
+        <StyledDummyCard>
+          <div className="card-name">
+            <img src="https://cdn-icons-png.flaticon.com/512/179/179457.png" />
+          </div>
+          <div className="card-number">4000 0566 5566 5556</div>
+          <div className="card-holder-name">
+            Hello, {clientUser && clientUser.nickname}
+          </div>
+          <div className="card-amount">
+            Your total is {formatPrice(shippingCharges + totalAmount)}
+          </div>
+          <div className="card-expi">12/26</div>
+        </StyledDummyCard>
       )}
       <form id="payment-form" onSubmit={handleSubmit}>
         <CardElement
@@ -247,7 +321,7 @@ const CheckoutForm = () => {
         />
         <button disabled={processing || disabled || succeeded} type="submit">
           <span id="button-text">
-            {processing ? <div id="spinner" className="spinner"></div> : 'Pay'}
+            {processing ? <div id="roller" className="roller"></div> : 'Pay'}
           </span>
         </button>
         {error && (

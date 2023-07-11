@@ -16,9 +16,6 @@ const StyledBanner = styled.section`
     color: var(--clr-grey-5);
     font-size: 1rem;
   }
-  main {
-    background: var(--primary-9);
-  }
   .content {
     display: flex;
     flex-direction: column;

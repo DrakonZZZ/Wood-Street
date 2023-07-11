@@ -12,7 +12,6 @@ const cart_reducer = (state, action) => {
     // add item to the cart
     case ADD_TO_CART: {
       const { id, color, amount, product } = action.payload;
-      console.log(product);
       const newItemArray = state.cart.find(
         (itemId) => itemId.id === id + color
       );

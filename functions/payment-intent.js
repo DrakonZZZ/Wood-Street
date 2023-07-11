@@ -25,10 +25,6 @@ export async function handler(event, context) {
         body: JSON.stringify({ message: error.message }),
       };
     }
-    return {
-      statusCode: 200,
-      body: JSON.stringify(cart),
-    };
   }
 
   return {

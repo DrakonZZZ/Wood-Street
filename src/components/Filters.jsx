@@ -100,8 +100,6 @@ const Filters = () => {
   const categories = getUniqueValues(allProducts, 'category');
   const companies = getUniqueValues(allProducts, 'company');
 
-  console.log('filtering');
-
   return (
     <StyledFilter>
       <div className="content">

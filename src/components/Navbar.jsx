@@ -1,5 +1,5 @@
 import { FaBars } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { links } from '../utilities/data';
 import CartIcons from './CartIcons';
 import { useProductsContext } from '../context/products_context';
@@ -26,6 +26,9 @@ const StyledNavbar = styled.nav`
     img {
       width: 175px;
       margin-left: -15px;
+    }
+    h3 {
+      color: var(--primary-3);
     }
   }
   .nav-hamburger {
@@ -65,9 +68,9 @@ const StyledNavbar = styled.nav`
         text-transform: capitalize;
         letter-spacing: var(--spacing);
         padding: 0.5rem;
-        &:hover {
-          border-bottom: 2px solid var(--clr-primary-7);
-        }
+      }
+      .active {
+        border-bottom: 2px solid var(--primary-3);
       }
     }
     .cart-btn-container {
@@ -95,7 +98,12 @@ const Nav = () => {
             const { id, text, url } = navLink;
             return (
               <li key={id}>
-                <Link to={url}>{text}</Link>
+                <NavLink
+                  to={url}
+                  className={({ isActive }) => (isActive ? 'active' : null)}
+                >
+                  {text}
+                </NavLink>
               </li>
             );
           })}

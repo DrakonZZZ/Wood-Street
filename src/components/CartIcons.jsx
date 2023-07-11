@@ -98,11 +98,7 @@ const CartIcons = () => {
           }}
         >
           Logout
-          <img
-            src={clientUser?.picture}
-            alt={clientUser.nickname}
-            className="profile"
-          />
+          <FaUser />
         </button>
       ) : (
         <button type="button" className="auth-btn" onClick={loginWithRedirect}>
