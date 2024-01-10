@@ -21,6 +21,8 @@ const StyledBanner = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-left: 2rem;
+    text-align: right;
   }
   @media (min-width: 992px) {
     height: calc(100vh - 5rem);
@@ -56,7 +58,7 @@ const StyledBanner = styled.section`
       position: absolute;
       width: 20%;
       height: 80%;
-      background: url('https://images.squarespace-cdn.com/content/v1/55bebb51e4b036c52ebe8c45/1564357876864-1XY4WTWJMJ3S5TG26TZY/black+and+purple+bedroom');
+      background: url('./b&p-bedroom.jpg');
       bottom: 10%;
       left: -15%;
       border-radius: 8px;
@@ -67,8 +69,7 @@ const StyledBanner = styled.section`
       position: absolute;
       width: 20%;
       height: 80%;
-      background: url('https://buildingandinteriors.com/wp-content/uploads/2022/12/Magnificient-purple-bedroom-scaled.jpg')
-        center;
+      background: url('./purple-bedroom.jpg') center;
       bottom: 10%;
       right: -15%;
       border-radius: var(--radius);
@@ -82,11 +83,8 @@ const Banner = () => {
   return (
     <StyledBanner className="section-center">
       <div className="img-container">
-        <img
-          src="https://buildingandinteriors.com/wp-content/uploads/2022/12/Purple-theme.jpg"
-          alt="fancy sofa"
-          className="main-img"
-        />
+        {' '}
+        <img src="./purple wall.jpg" alt="fancy sofa" className="main-img" />
       </div>
       <div className="content">
         <h1>
@@ -94,8 +92,8 @@ const Banner = () => {
           own safe haven
         </h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero iusto
-          debitis ipsum quidem, nobis at mollitia modi ipsa eaque excepturi.
+          Discover stylish furniture at our online store. From modern sofas to
+          elegant tables, find quality pieces for your home today!
         </p>
         <Link to="/products" className="btn main-btn">
           Choose Now

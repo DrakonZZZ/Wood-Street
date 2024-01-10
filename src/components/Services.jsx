@@ -81,11 +81,10 @@ const Services = () => {
             Tailored toward Your Liking
           </h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis,
-            quia error hic soluta sunt rerum? Maxime minus fugiat odit quidem
-            eligendi provident ex qui quod reiciendis est quaerat unde placeat
-            possimus optio esse, itaque officiis deleniti quae iusto
-            consequuntur magni.
+            Craft your dream space with our custom furniture services. From
+            unique designs to personalized finishes, tailor each piece to match
+            your style. Experience furniture that reflects your taste and fits
+            seamlessly into your home – your vision, our craftsmanship.
           </p>
         </div>
         <div className="services-center">

@@ -82,10 +82,11 @@ const Contact = () => {
         <h4>Get 15% off on your first registration</h4>
         <div className="content">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
-            recusandae officia similique vel aperiam sunt saepe incidunt iusto
-            fuga nostrum quas ratione maiores sapiente asperiores, adipisci
-            accusantium amet veritatis voluptate?
+            Join us and enjoy 15% off your inaugural purchase! Register now to
+            unlock exclusive access to quality furniture at discounted prices.
+            Elevate your space with stylish pieces while saving on your first
+            order. Don't miss out on this special offer – sign up today and
+            adorn your home for less!
           </p>
           {state.succeeded ? (
             <h4>Thanks for Contacting us!</h4>
